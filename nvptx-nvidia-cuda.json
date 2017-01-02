@@ -1,0 +1,11 @@
+{
+  "arch": "nvptx",
+  "cpu": "sm_20",
+  "data-layout": "e-p:32:32-i64:64-v16:16-v32:32-n16:32:64",
+  "llvm-target": "nvptx-nvidia-cuda",
+  "max-atomic-width": 0,
+  "os": "cuda",
+  "panic-strategy": "abort",
+  "target-endian": "little",
+  "target-pointer-width": "32"
+}

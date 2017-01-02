@@ -1,0 +1,7 @@
+[package]
+authors = ["Jorge Aparicio <japaricious@gmail.com>"]
+name = "kernel"
+version = "0.1.0"
+
+[dependencies]
+nvptx-builtins = "0.1.0"

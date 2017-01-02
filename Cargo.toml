@@ -1,0 +1,11 @@
+[package]
+authors = ["Jorge Aparicio <japaricious@gmail.com>"]
+name = "nvptx"
+version = "0.1.0"
+
+[dependencies.cuda]
+git = "https://github.com/japaric/cuda"
+
+[dev-dependencies]
+image = "0.10.4"
+rand = "0.3.15"
