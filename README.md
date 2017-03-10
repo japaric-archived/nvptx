@@ -15,7 +15,12 @@
 
 ## First steps
 
-Recent nightlies (2017-01-XX and newer) can compile Rust code to PTX (Parallel
+**HEADS UP** Due to
+[rust-lang/rust#38824](https://github.com/rust-lang/rust/issues/38824), no
+nightly release available to date (2017-03-10) can generate PTX code. You'll
+have to build your own compiler with LLVM assertions disabled.
+
+Since 2016-12-31, `rustc` can compile can compile Rust code to PTX (Parallel
 Thread Execution) code, which is like GPU assembly, via `--emit=asm` and the
 right `--target` argument. This PTX code can then be loaded and executed on a
 GPU.
