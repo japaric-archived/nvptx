@@ -15,15 +15,21 @@
 
 ## First steps
 
-**HEADS UP** Due to
-[rust-lang/rust#38824](https://github.com/rust-lang/rust/issues/38824), no
-nightly release available to date (2017-03-10) can generate PTX code. You'll
-have to build your own compiler with LLVM assertions disabled.
+Since 2016-12-31, `rustc` can compile Rust code to PTX (Parallel Thread
+Execution) code, which is like GPU assembly, via `--emit=asm` and the right
+`--target` argument. This PTX code can then be loaded and executed on a GPU.
 
-Since 2016-12-31, `rustc` can compile can compile Rust code to PTX (Parallel
-Thread Execution) code, which is like GPU assembly, via `--emit=asm` and the
-right `--target` argument. This PTX code can then be loaded and executed on a
-GPU.
+*However*, a few days later 128-bit integer support landed in rustc and
+broke compilation of the `core` crate for NVPTX targets (LLVM assertions).
+Furthermore, there was no nightly release between these two events so it was not
+possible to use the NVPTX backend with a nightly compiler.
+
+Just recently (2017-05-18) I realized (thanks to [this blog post]) that we can
+work around the problem by compiling a *fork* of the core crate that doesn't
+contain code that involves 128-bit integers. Which is a bit unfortunate but,
+hey, if it works then it works.
+
+[this blog post]: https://gergo.erdi.hu/blog/2017-05-12-rust_on_avr__beyond_blinking/
 
 ### Targets
 
@@ -65,6 +71,12 @@ OK
 # You'll need to use Xargo to build the `core` crate "on the fly"
 # Install it if you don't already have it
 $ cargo install xargo || true
+
+# Then instruct Xargo to compile a fork of the core crate that contains no
+# 128-bit integers
+$ edit Xargo.toml && cat Xargo.toml
+[dependencies.core]
+git = "https://github.com/japaric/core64"
 
 # Xargo has the exact same CLI as Cargo
 $ xargo rustc --target nvptx64-nvidia-cuda -- --emit=asm
