@@ -118,7 +118,7 @@ function. Only *global* functions (AKA kernels) can be launched by the hosts.
 
 To turn `foo` into a global function, its ABI must be changed to "ptx-kernel":
 
-```
+``` rust
 #![feature(abi_ptx)]
 #![no_std]
 
@@ -283,7 +283,7 @@ RGBA -> grayscale on the CPU
 If you encounter any problem with the Rust -> PTX feature in the compiler,
 report it to [this meta issue].
 
-[this meta issue]: TODO
+[this meta issue]: https://github.com/rust-lang/rust/issues/38789
 
 ## License
 
