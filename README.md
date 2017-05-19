@@ -237,7 +237,7 @@ $ find kernel/target -name '*.s'
 kernel/target/nvptx64-nvidia-cuda/release/deps/kernel-bb52137592af9c8c.s
 ```
 
-The [`example`](example) directory contains the "host" code. Inside that
+The [`examples`](examples) directory contains the "host" code. Inside that
 directory, there are 3 file; each file is an example program:
 
 - `add` - Add two (mathematical) vectors on the GPU
