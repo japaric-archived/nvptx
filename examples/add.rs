@@ -28,8 +28,8 @@ fn run(ptx: &str) -> Result<()> {
     // Allocate memory on the host
     let mut rng: XorShiftRng = rand::thread_rng().gen();
 
-    let h_a = (0..SIZE).map(|_| rng.gen()).collect::<Vec<f32>>();
-    let h_b = (0..SIZE).map(|_| rng.gen()).collect::<Vec<f32>>();
+    let h_a = rng.gen_iter().take(SIZE).collect::<Vec<f32>>();
+    let h_b = rng.gen_iter().take(SIZE).collect::<Vec<f32>>();
     let mut h_c = (0..SIZE).map(|_| 0.).collect::<Vec<f32>>();
 
     // Initialize driver, and load kernel
