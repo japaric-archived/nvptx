@@ -23,9 +23,9 @@ fn main() {
         .read_to_string(ptx)
         .unwrap();
 
-    let img = image::open(args.next().unwrap()).unwrap();
+    let img = image::open(args.next().unwrap()).unwrap().to_rgba();
 
-    run(ptx, img.as_rgba8().unwrap()).unwrap()
+    run(ptx, &img).unwrap()
 }
 
 fn run(ptx: &str, img: &RgbaImage) -> Result<()> {
