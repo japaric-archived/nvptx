@@ -29,7 +29,7 @@ fn main() {
 }
 
 fn run(ptx: &str, img: &RgbaImage) -> Result<()> {
-    const GRID_SIZE: u32 = 32;
+    const BLOCK_SIZE: u32 = 32;
 
     let h_rgba = img.as_ptr();
     let (w, h) = img.dimensions();
@@ -81,8 +81,8 @@ fn run(ptx: &str, img: &RgbaImage) -> Result<()> {
                   Any(&d_gray),
                   Any(&(w as i32)),
                   Any(&(h as i32))],
-                Grid::xy(GRID_SIZE, GRID_SIZE),
-                Block::xy((w - 1) / GRID_SIZE + 1, (h - 1) / GRID_SIZE + 1))?;
+                Grid::xy((w - 1) / BLOCK_SIZE + 1, (h - 1) / BLOCK_SIZE + 1),
+                Block::xy(BLOCK_SIZE, BLOCK_SIZE))?;
     let elapsed = now.elapsed();
     ds.push(elapsed);
     println!("    {:?} - Executing the kernel", elapsed);
