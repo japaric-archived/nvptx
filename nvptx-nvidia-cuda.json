@@ -8,6 +8,7 @@
     "max-atomic-width": 0,
     "os": "cuda",
     "panic-strategy": "abort",
+    "target-c-int-width": "32",
     "target-endian": "little",
     "target-pointer-width": "32"
 }
