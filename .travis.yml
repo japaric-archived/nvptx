@@ -5,6 +5,7 @@ install:
   - sh ci/install.sh
 
 script:
+  - export RUST_TARGET_PATH=`pwd`
   - bash ci/script.sh
 
 cache: cargo
