@@ -1,3 +1,14 @@
+# Status
+
+This documentation about an unstable feature is **UNMAINTAINED** and was written
+over a year ago. Things may have drastically changed since then; read this at
+your own risk! If you are interested in modern Rust on GPU development check out
+https://github.com/rust-cuda/wg
+
+-- @japaric, 2018-12-08
+
+---
+
 # `nvptx`
 
 > How to: Run Rust code on your NVIDIA GPU
