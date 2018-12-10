@@ -1,7 +1,9 @@
 #![feature(abi_ptx)]
 #![no_std]
 
-extern crate nvptx_builtins as intrinsics;
+extern crate stdsimd;
+
+use stdsimd::nvptx;
 
 /// Add two "vectors" of length `n`. `c <- a + b`
 #[no_mangle]
@@ -9,9 +11,9 @@ pub unsafe extern "ptx-kernel" fn add(a: *const f32,
                                       b: *const f32,
                                       c: *mut f32,
                                       n: usize) {
-    let i = intrinsics::block_dim_x()
-        .wrapping_mul(intrinsics::block_idx_x())
-        .wrapping_add(intrinsics::thread_idx_x()) as isize;
+    let i = nvptx::_block_dim_x()
+        .wrapping_mul(nvptx::_block_idx_x())
+        .wrapping_add(nvptx::_thread_idx_x()) as isize;
 
     if (i as usize) < n {
         *c.offset(i) = *a.offset(i) + *b.offset(i);
@@ -23,9 +25,9 @@ pub unsafe extern "ptx-kernel" fn add(a: *const f32,
 pub unsafe extern "ptx-kernel" fn memcpy(dst: *mut f32,
                                          src: *const f32,
                                          n: usize) {
-    let i = (intrinsics::block_dim_x())
-        .wrapping_mul(intrinsics::block_idx_x())
-        .wrapping_add(intrinsics::thread_idx_x()) as isize;
+    let i = (nvptx::_block_dim_x())
+        .wrapping_mul(nvptx::_block_idx_x())
+        .wrapping_add(nvptx::_thread_idx_x()) as isize;
 
     if (i as usize) < n {
         *dst.offset(i) = *src.offset(i);
@@ -45,12 +47,12 @@ pub unsafe extern "ptx-kernel" fn rgba2gray(rgba: *const Rgba,
                                             gray: *mut u8,
                                             width: i32,
                                             height: i32) {
-    let x = intrinsics::block_idx_x()
-        .wrapping_mul(intrinsics::block_dim_x())
-        .wrapping_add(intrinsics::thread_idx_x());
-    let y = intrinsics::block_idx_y()
-        .wrapping_mul(intrinsics::block_dim_y())
-        .wrapping_add(intrinsics::thread_idx_y());
+    let x = nvptx::_block_idx_x()
+        .wrapping_mul(nvptx::_block_dim_x())
+        .wrapping_add(nvptx::_thread_idx_x());
+    let y = nvptx::_block_idx_y()
+        .wrapping_mul(nvptx::_block_dim_y())
+        .wrapping_add(nvptx::_thread_idx_y());
 
     if x < width && y < height {
         let i = y.wrapping_mul(width).wrapping_add(x) as isize;

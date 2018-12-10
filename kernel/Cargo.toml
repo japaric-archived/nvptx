@@ -4,4 +4,4 @@ name = "kernel"
 version = "0.1.0"
 
 [dependencies]
-nvptx-builtins = "0.1.0"
+stdsimd = { git = "https://github.com/rust-lang-nursery/stdsimd", features = [ ] }
